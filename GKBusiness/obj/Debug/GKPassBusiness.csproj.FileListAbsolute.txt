@@ -1,0 +1,7 @@
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\bin\Debug\GKBusiness.dll
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\bin\Debug\GKBusiness.pdb
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\obj\Debug\GKPassBusiness.csprojResolveAssemblyReference.cache
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\obj\Debug\GKBusiness.dll
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\obj\Debug\GKBusiness.pdb
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\bin\Debug\GKPassDomainObjects.dll
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKBusiness\bin\Debug\GKPassDomainObjects.pdb

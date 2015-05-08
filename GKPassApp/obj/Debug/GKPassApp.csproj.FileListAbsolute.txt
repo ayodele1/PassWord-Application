@@ -1,0 +1,9 @@
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassApp\bin\Debug\GKPassApp.exe.config
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\Bin\GKPassApp.exe.config
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassApp\obj\Debug\GKPassApp.csprojResolveAssemblyReference.cache
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassApp\obj\Debug\GKPassApp.Properties.Resources.resources
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassApp\obj\Debug\GKPassApp.csproj.GenerateResource.Cache
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\Bin\GKPassApp.exe
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\Bin\GKPassApp.pdb
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassApp\obj\Debug\GKPassApp.exe
+c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassApp\obj\Debug\GKPassApp.pdb
