@@ -11,6 +11,8 @@ namespace UserInterfaceManager
         private Key _selectedKey = null;
         private List<Key> _selectedKeys = new List<Key>();
         public bool _edited = false;
+        public static event KeySelectedEventHandler KeySelected;
+
         #endregion
 
         #region Public Interface
@@ -255,6 +257,7 @@ namespace UserInterfaceManager
         {
             _editKeyButton.Enabled = _keyEditContextMenu.Enabled = _keylistView.SelectedItems.Count == 1;
             _deleteKeyButton.Enabled = _keyDeleteContextMenu.Enabled = _keylistView.SelectedItems.Count != 0;
+
         }
 
         /// <summary>
@@ -284,8 +287,17 @@ namespace UserInterfaceManager
             foreach (ListViewItem lvi in _keylistView.SelectedItems)
             {
                 _selectedKey = (Key)lvi.Tag;
+                ContextMgr.SelectedKey = _selectedKey;
                 _selectedKeys.Add(_selectedKey);
                 ContextMgr.SelectedKeys = _selectedKeys;
+            }
+            if (_keylistView.SelectedItems.Count < 1)
+            {
+                ContextMgr.SelectedKey = null;
+            }
+            if (KeySelected != null)
+            {
+                KeySelected(ContextMgr.SelectedKey);
             }
         }
         private void onDoubleClick(object sender, MouseEventArgs e)
