@@ -75,6 +75,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._richTextBox = new System.Windows.Forms.RichTextBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this._groupTreeControl = new UserInterfaceManager.GroupTreeControl();
             this._keyListControl = new UserInterfaceManager.KeyListControl();
             this._mainStatusControl = new UserInterfaceManager.StatusControl();
@@ -112,6 +113,7 @@
             this._openMenuItem,
             this.toolStripSeparator,
             this._saveFileMenu,
+            this.toolStripMenuItem1,
             this._saveAsFileMenu,
             this.toolStripSeparator1,
             this.printToolStripMenuItem,
@@ -128,7 +130,7 @@
             this._newMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._newMenuItem.Name = "_newMenuItem";
             this._newMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this._newMenuItem.Size = new System.Drawing.Size(157, 22);
+            this._newMenuItem.Size = new System.Drawing.Size(221, 22);
             this._newMenuItem.Text = "&New";
             this._newMenuItem.Click += new System.EventHandler(this.onNewDocumentClick);
             // 
@@ -138,14 +140,14 @@
             this._openMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._openMenuItem.Name = "_openMenuItem";
             this._openMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this._openMenuItem.Size = new System.Drawing.Size(157, 22);
+            this._openMenuItem.Size = new System.Drawing.Size(217, 22);
             this._openMenuItem.Text = "&Open";
             this._openMenuItem.Click += new System.EventHandler(this.onOpenFile);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(214, 6);
             // 
             // _saveFileMenu
             // 
@@ -153,21 +155,21 @@
             this._saveFileMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._saveFileMenu.Name = "_saveFileMenu";
             this._saveFileMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this._saveFileMenu.Size = new System.Drawing.Size(157, 22);
+            this._saveFileMenu.Size = new System.Drawing.Size(217, 22);
             this._saveFileMenu.Text = "&Save";
             this._saveFileMenu.Click += new System.EventHandler(this.onSaveFile);
             // 
             // _saveAsFileMenu
             // 
             this._saveAsFileMenu.Name = "_saveAsFileMenu";
-            this._saveAsFileMenu.Size = new System.Drawing.Size(157, 22);
-            this._saveAsFileMenu.Text = "Save &As";
+            this._saveAsFileMenu.Size = new System.Drawing.Size(221, 22);
+            this._saveAsFileMenu.Text = "Save As (XML)";
             this._saveAsFileMenu.Click += new System.EventHandler(this.onSaveAsFile);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -175,7 +177,7 @@
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -183,18 +185,18 @@
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -507,7 +509,13 @@
             this._richTextBox.Size = new System.Drawing.Size(677, 150);
             this._richTextBox.TabIndex = 0;
             this._richTextBox.Text = "";
-            this._richTextBox.TextChanged += new System.EventHandler(this.onTextChanged);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(221, 22);
+            this.toolStripMenuItem1.Text = "Save As Encrypted Data";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.onSaveEncryptedData);
             // 
             // _groupTreeControl
             // 
@@ -624,5 +632,6 @@
 		private KeyListControl _keyListControl;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.RichTextBox _richTextBox;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 	}
 }

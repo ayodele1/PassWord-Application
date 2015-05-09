@@ -29,10 +29,10 @@
 		private void InitializeComponent()
 		{
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.clockControl1 = new UserInterfaceManager.ClockControl();
             this._comboBoxLogger = new System.Windows.Forms.ComboBox();
             this._totalGroupsLabel = new System.Windows.Forms.Label();
             this._keysLabel = new System.Windows.Forms.Label();
-            this.clockControl1 = new UserInterfaceManager.ClockControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +56,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1032, 40);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // clockControl1
+            // 
+            this.clockControl1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clockControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clockControl1.Location = new System.Drawing.Point(867, 9);
+            this.clockControl1.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.clockControl1.Name = "clockControl1";
+            this.clockControl1.Size = new System.Drawing.Size(157, 22);
+            this.clockControl1.TabIndex = 0;
             // 
             // _comboBoxLogger
             // 
@@ -89,16 +99,6 @@
             this._keysLabel.TabIndex = 3;
             this._keysLabel.Text = "X of Y selected Keys";
             this._keysLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // clockControl1
-            // 
-            this.clockControl1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clockControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clockControl1.Location = new System.Drawing.Point(867, 9);
-            this.clockControl1.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
-            this.clockControl1.Name = "clockControl1";
-            this.clockControl1.Size = new System.Drawing.Size(157, 22);
-            this.clockControl1.TabIndex = 0;
             // 
             // StatusControl
             // 

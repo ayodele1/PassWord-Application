@@ -3,6 +3,7 @@ using GKPassDomainObjects;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -145,7 +146,7 @@ namespace UserInterfaceManager
         private bool OpenXmlFile(GKDocument newDocument)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "KeyPassFiles | *.xml";
+            ofd.Filter = "KeyPassFiles(.xml) | *.xml | KeyPassEncrypted(.kcf)| *.kcf";
             ofd.DefaultExt = ".xml";
             ofd.InitialDirectory = Assembly.GetExecutingAssembly().Location;
             using (ofd)
@@ -154,14 +155,21 @@ namespace UserInterfaceManager
                 {
                     return false;
                 }
-                try
+                if (ofd.FilterIndex == 1)
                 {
-                    ReadXml(newDocument, ofd.FileName);
+                    try
+                    {
+                        ReadXml(newDocument, ofd.FileName);
+                    }
+                    catch (XmlException e)
+                    {
+                        MessageBoxHelper.Error(this, "The xml File is invalid\n" + e.Message);
+                        return false;
+                    }
                 }
-                catch (XmlException e)
+                else if (ofd.FilterIndex == 2)
                 {
-                    MessageBoxHelper.Error(this, "The xml File is invalid\n" + e.Message);
-                    return false;
+                    OpenEncryptedFile(ofd.FileName, newDocument);
                 }
 
             }
@@ -171,6 +179,26 @@ namespace UserInterfaceManager
             _currentFileLocation = ofd.FileName;
             setTitle(Path.GetFileName(_currentFileLocation));
             return true;
+        }
+
+        private void OpenEncryptedFile(string fileName, GKDocument doc)
+        {
+            GKDocument newDoc;
+            byte[] encryptedBuffer = File.ReadAllBytes(fileName);
+            byte[] decryptedDocument = CryptoHelper.Decrypt(encryptedBuffer);
+
+            MemoryStream ms = new MemoryStream(decryptedDocument);
+            using (ms)
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                newDoc = (GKDocument)bf.Deserialize(ms);
+            }
+
+            foreach (Group g in newDoc.Groups)
+            {
+                doc.Groups.Add(g);
+            }
+
         }
         /// <summary>
         /// Reads each node of the xml file into a Group-Key Document for viewing
@@ -201,6 +229,45 @@ namespace UserInterfaceManager
                     g.Keys.Add(k);
                 }
                 newDocument.Groups.Add(g);
+            }
+        }
+
+        private void SaveAsEncryptedData()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Assembly.GetExecutingAssembly().Location;
+            sfd.Filter = "KeyPassEncrypted | .kcf";
+            sfd.DefaultExt = "kcf";
+            using (sfd)
+            {
+                if (sfd.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                GKDocument currentDoc = ContextMgr.Document;
+                try
+                {
+                    MemoryStream ms = new MemoryStream();
+                    using (ms)
+                    {
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(ms, currentDoc);
+                    }
+                    byte[] buffer = ms.ToArray();
+                    byte[] encryptedDocument = CryptoHelper.Encrypt(buffer);
+
+                    string path = Path.GetFullPath(sfd.FileName);
+
+                    File.WriteAllBytes(path, encryptedDocument);
+                    setTitle(Path.GetFileName(sfd.FileName));
+                }
+                catch (Exception ex)
+                {
+                    MessageBoxHelper.Error(this, ex.Message);
+                    return;
+                }
+                _groupTreeControl._edited = false;
+                _keyListControl._edited = false;
+
             }
         }
         #endregion
@@ -245,6 +312,60 @@ namespace UserInterfaceManager
             _editGroupToolStrip.Enabled = _deleteGroupToolStrip.Enabled = _groupTreeControl.HasSelectedGroup();
             _editKeyToolStrip.Enabled = _deleteKeyToolStrip.Enabled = _keyListControl.HasSelectedKey();
             _saveButton.Enabled = _saveFileMenu.Enabled = this.DocumentEdited() == true;
+        }
+
+        private void onNewDocumentClick(object sender, EventArgs e)
+        {
+            if (DocumentEdited())
+            {
+                DialogResult dr = MessageBoxHelper.QuestionYesNoCancel(this, "Document is insaved. Do you want to save?");
+                if (dr == DialogResult.Cancel)
+                {
+                    return;
+                }
+                if (dr == DialogResult.No)
+                {
+                    _groupTreeControl.ClearDocument();
+                }
+                if (dr == DialogResult.Yes)
+                {
+                    onSaveFile(sender, e);
+                    if (_fileSaved == false)
+                    {
+                        return;
+                    }
+                }
+                _groupTreeControl.ClearDocument();
+            }
+            else
+            {
+                _groupTreeControl.ClearDocument();
+            }
+            _groupTreeControl._edited = false;
+            _keyListControl._edited = false;
+            _currentFileLocation = null;
+            setTitle("New Document");
+        }
+
+        void onKeySelected(Key k)
+        {
+            if (k != null)
+            {
+                _richTextBox.Clear();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Title: " + k.Title)
+                        .AppendLine("UserName:" + k.UserName)
+                        .AppendLine("PassWord: " + k.PassWord)
+                        .AppendLine("Url: " + k.Url)
+                        .AppendLine("Notes")
+                        .AppendLine("----------------------------------")
+                        .AppendLine(k.Notes);
+                _richTextBox.Text = sb.ToString();
+            }
+            else
+            {
+                _richTextBox.Clear();
+            }
         }
 
         private void onGroupAddClick(object sender, EventArgs e)
@@ -357,63 +478,9 @@ namespace UserInterfaceManager
         }
         #endregion
 
-        private void onNewDocumentClick(object sender, EventArgs e)
+        private void onSaveEncryptedData(object sender, EventArgs e)
         {
-            if (DocumentEdited())
-            {
-                DialogResult dr = MessageBoxHelper.QuestionYesNoCancel(this, "Document is insaved. Do you want to save?");
-                if (dr == DialogResult.Cancel)
-                {
-                    return;
-                }
-                if (dr == DialogResult.No)
-                {
-                    _groupTreeControl.ClearDocument();
-                }
-                if (dr == DialogResult.Yes)
-                {
-                    onSaveFile(sender, e);
-                    if (_fileSaved == false)
-                    {
-                        return;
-                    }
-                }
-                _groupTreeControl.ClearDocument();
-            }
-            else
-            {
-                _groupTreeControl.ClearDocument();
-            }
-            _groupTreeControl._edited = false;
-            _keyListControl._edited = false;
-            _currentFileLocation = null;
-            setTitle("New Document");
-        }
-
-        void onKeySelected(Key k)
-        {
-            if (k != null)
-            {
-                _richTextBox.Clear();
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("Title: " + k.Title)
-                        .AppendLine("UserName:" + k.UserName)
-                        .AppendLine("PassWord: " + k.PassWord)
-                        .AppendLine("Url: " + k.Url)
-                        .AppendLine("Notes")
-                        .AppendLine("----------------------------------")
-                        .AppendLine(k.Notes);
-                _richTextBox.Text = sb.ToString();
-            }
-            else
-            {
-                _richTextBox.Clear();
-            }
-        }
-
-        private void onTextChanged(object sender, EventArgs e)
-        {
-
+            SaveAsEncryptedData();
         }
     }
 }
