@@ -2,3 +2,4 @@ c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassDomai
 c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassDomainObjects\bin\Debug\GKPassDomainObjects.pdb
 c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassDomainObjects\obj\Debug\GKPassDomainObjects.dll
 c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\GKPassDomainObjects\obj\Debug\GKPassDomainObjects.pdb
+C:\Users\Ayodele\Documents\Visual Studio 2013\Projects\GKPasswordApp\GKPassDomainObjects\obj\Debug\GKPassDomainObjects.csprojResolveAssemblyReference.cache

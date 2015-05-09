@@ -11,6 +11,7 @@ namespace GKBusiness
         private static GKDocument _document = new GKDocument();
         private static Group _selectedGroup = null;
         private static List<Key> _selectedKeys = new List<Key>();
+        private static Key _selectedKey = null;
         public static event GroupSelectedEventHandler GroupSelected;
 
         #endregion
@@ -41,6 +42,16 @@ namespace GKBusiness
             get { return _selectedKeys; }
             set { _selectedKeys = value; }
         }
+
+        /// <summary>
+        /// Returns the selectedKey in the listView
+        /// </summary>
+        public static Key SelectedKey
+        {
+            get { return _selectedKey; }
+            set { _selectedKey = value; }
+        }
+
         public static void FireGroupSelected()
         {
             if (GroupSelected != null)

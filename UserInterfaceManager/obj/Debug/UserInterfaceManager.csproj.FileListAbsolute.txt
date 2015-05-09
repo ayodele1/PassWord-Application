@@ -17,3 +17,4 @@ c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\UserInterfa
 c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\UserInterfaceManager\obj\Debug\UserInterfaceManager.GroupTreeControl.resources
 c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\UserInterfaceManager\obj\Debug\UserInterfaceManager.KeyListControl.resources
 c:\users\ayodele\documents\visual studio 2013\Projects\GKPasswordApp\UserInterfaceManager\obj\Debug\UserInterfaceManager.KeyPropertiesForm.resources
+C:\Users\Ayodele\Documents\Visual Studio 2013\Projects\GKPasswordApp\UserInterfaceManager\obj\Debug\UserInterfaceManager.PasswordLoginForm.resources

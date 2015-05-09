@@ -143,7 +143,7 @@
             this._keyDeleteContextMenu,
             this._duplicateKeyContextMenu});
             this._keyListContextMenu.Name = "_keyListContextMenu";
-            this._keyListContextMenu.Size = new System.Drawing.Size(194, 114);
+            this._keyListContextMenu.Size = new System.Drawing.Size(194, 92);
             // 
             // _keyAddContextMenu
             // 
